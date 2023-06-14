@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: ms-demo-1
+  h2:
+    console:
+      enabled: true
+  sql:
+    init:
+      mode: always
+      platform: h2
+  datasource:
+    url: jdbc:h2:mem:userDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+error-messager:
+    messager:
+        400: "Bad request"
+        401: "Unauthorized, check credentials"
+        404: "Not found"
+        409: "There is already a registered user with that email"
+        500: "An error occurred"
+        4001: "check field: "
