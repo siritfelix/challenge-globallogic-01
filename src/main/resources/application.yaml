@@ -19,6 +19,9 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.H2Dialect
+app:
+  jwtSecret: ======================FSIRITGL=Spring===========================
+  jwtExpirationMs: 60000
 error-messager:
     messager:
         400: "Bad request"
