@@ -58,6 +58,11 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .antMatchers("/h2-console/**/**/**/**").permitAll()
+                        .antMatchers("/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/v2/api-docs/**",
+                                "/swagger-resources/**")
+                        .permitAll()
                         .antMatchers(HttpMethod.POST, "/api/v1/sing-up/**").permitAll()
                         .anyRequest().authenticated());
         http.headers(headers -> headers.frameOptions().disable());
