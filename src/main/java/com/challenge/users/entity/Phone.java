@@ -1,26 +1,44 @@
-package com.challenge.users.dto.request;
+package com.challenge.users.entity;
 
-import com.challenge.users.entity.Phone;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.challenge.users.dto.request.PhoneUserSingUpRequestDto;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
 @Getter
-public class PhoneUserSingUpRequestDto {
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "PHONE_ENTITY")
+public class Phone {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
     public Long number;
     public Integer citycode;
     public String contrycode;
+    @JsonManagedReference
+    @JoinColumn(name = "client_id", nullable = false, updatable = false, insertable = true)
+    @ManyToOne
+    public User userEntity;
 
-    public PhoneUserSingUpRequestDto(Phone phone) {
-        this.number = phone.getNumber();
-        this.citycode = phone.getCitycode();
-        this.contrycode = phone.getContrycode();
+    public Phone(PhoneUserSingUpRequestDto phoneUserSingUpRequestDto) {
+        this.number = phoneUserSingUpRequestDto.getNumber();
+        this.citycode = phoneUserSingUpRequestDto.getCitycode();
+        this.contrycode = phoneUserSingUpRequestDto.getContrycode();
     }
 
     @Override
@@ -41,7 +59,7 @@ public class PhoneUserSingUpRequestDto {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PhoneUserSingUpRequestDto other = (PhoneUserSingUpRequestDto) obj;
+        Phone other = (Phone) obj;
         if (number == null) {
             if (other.number != null)
                 return false;
@@ -59,6 +77,5 @@ public class PhoneUserSingUpRequestDto {
             return false;
         return true;
     }
-    
 
 }
