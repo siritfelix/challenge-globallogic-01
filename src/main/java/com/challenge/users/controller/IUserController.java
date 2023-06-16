@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "ms-users", description = "Microservicio de consulta de usuarios")
 @RequestMapping(IUserController.URI)
 public interface IUserController {
-	public static final String URI = "api/v1";
+	public static final String URI = "/api/v1";
 	public static final String SING_UP = "/sing-up";
 	public static final String LOGIN = "/login";
 

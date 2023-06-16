@@ -7,19 +7,11 @@ import java.util.stream.Collectors;
 import com.challenge.users.dto.request.PhoneUserSingUpRequestDto;
 import com.challenge.users.entity.User;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Getter
-@Builder
-@ToString
 public class UserLoginResponseDto {
     private String id;
     private LocalDateTime created;
@@ -40,5 +32,9 @@ public class UserLoginResponseDto {
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.phones = user.getPhones().stream().map(PhoneUserSingUpRequestDto::new).collect(Collectors.toList());
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

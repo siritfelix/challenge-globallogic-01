@@ -17,7 +17,6 @@ import javax.validation.constraints.Size;
 import com.challenge.users.dto.request.UserSingUpRequestDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,7 +24,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "USER_ENTITY")
 public class User {

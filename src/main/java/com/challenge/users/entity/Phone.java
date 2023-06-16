@@ -15,7 +15,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -23,7 +22,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @Table(name = "PHONE_ENTITY")
-@ToString(exclude = "userEntity")
 public class Phone {
 
     @Id

@@ -4,17 +4,9 @@ import java.time.LocalDateTime;
 
 import com.challenge.users.entity.User;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
 @Getter
-@ToString
 public class UserResponseDto {
     private String id;
     private LocalDateTime created;
@@ -28,5 +20,9 @@ public class UserResponseDto {
         this.lastLogin = user.getLastLogin();
         this.token = null;
         this.isActive = user.getIsActive();
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

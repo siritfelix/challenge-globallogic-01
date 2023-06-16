@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.HttpClientErrorException.BadRequest;
-import org.springframework.web.client.HttpClientErrorException.NotFound;
-import org.springframework.web.client.HttpClientErrorException.Unauthorized;
+import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
 import com.challenge.users.config.ErrorMessagerMap;
 import com.challenge.users.dto.response.ErrorDto;
@@ -32,19 +31,6 @@ public class ApiExceptionHandler {
 
 	public ApiExceptionHandler(ErrorMessagerMap errorMessagerMap) {
 		this.errorMessagerMap = errorMessagerMap;
-	}
-
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	@ExceptionHandler({ NotFound.class })
-	@ResponseBody
-	public ResponseEntity<ErrorResponseDto> notFoundRequest(HttpServletRequest request, NotFound exception) {
-		return new ResponseEntity<ErrorResponseDto>(ErrorResponseDto.builder()
-				.error(new ArrayList<>(Arrays.asList(ErrorDto.builder()
-						.detail(errorMessagerMap.getMessager()
-								.get(404))
-						.codigo(404).timestamp(LocalDateTime.now())
-						.build())))
-				.build(), HttpStatus.NOT_FOUND);
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -113,7 +99,7 @@ public class ApiExceptionHandler {
 
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler({ Exception.class,
-			InternalError.class })
+			InternalError.class, InternalServerError.class })
 	@ResponseBody
 	public ResponseEntity<ErrorResponseDto> fatalErrorUnexpectedException(HttpServletRequest request,
 			Exception exception) {
@@ -123,21 +109,6 @@ public class ApiExceptionHandler {
 								.get(500))
 						.codigo(500).timestamp(LocalDateTime.now())
 						.build())))
-				.build(), HttpStatus.BAD_REQUEST);
+				.build(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-
-	@ResponseStatus(HttpStatus.UNAUTHORIZED)
-	@ExceptionHandler({ Unauthorized.class })
-	@ResponseBody
-	public ResponseEntity<ErrorResponseDto> unauthorizedException(HttpServletRequest request,
-			Unauthorized exception) {
-		return new ResponseEntity<ErrorResponseDto>(ErrorResponseDto.builder()
-				.error(new ArrayList<>(Arrays.asList(ErrorDto.builder()
-						.detail(errorMessagerMap.getMessager()
-								.get(401))
-						.codigo(401).timestamp(LocalDateTime.now())
-						.build())))
-				.build(), HttpStatus.BAD_REQUEST);
-	}
-
 }
