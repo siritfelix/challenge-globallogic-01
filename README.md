@@ -22,7 +22,8 @@ Instalación del proyecto
 >
 > docker run -p 8080:8080 --name user challenge-globallogic-01
 >
-
+* Para correr los test
+> ./gradlew jacocoTestReport
 * La descripcion de los endpoint se puede observar al levantar el proyecto, mediante el swagger accedemos al recurso: http://localhost:8080/swagger-ui.html
 * La covertura de test luego de compilar se encuentra en `build\jacoco\test\html\index.html con 85% de coverage`
 
